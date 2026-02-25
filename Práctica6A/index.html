@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESERVA DE VIAJES </title>
+    <title>Recerva de viajes</title>
 </head>
 <body>
-<h1>Datos Personales</h1>
-<form>
-<label for="nombre">Nombre:</label>
-<input type="text" id="nombre" name="nombre">
-</form>
-<br>
-<form>
-<label for="correo">Correo electrónico:</label>
-<input type="email" id="correo" name="correo" placeholder="example@email.com">
-</form>
-<br>
-<form>
-<label for="phone">Ingrese su número celular:</label>
-<input type="tel" id="phone" name="phone">
-</form>
-<br>
-<h1>Datos del viaje"</h1>
-<form>
+    <form>
+    <h1>Datos personales</h1>
+
+    <br>
+
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="nombre completo">
+
+    <br><br>
+
+    <label for="correo">Correo electronico:</label>
+    <input type="email" id="correo" name="correo" placeholder="example@gmail.com">
+
+    <br><br>
+
+    <label for="celular">Numero telefonico:</label>
+    <input type="number" id="celular" name="celular" placeholder="0000-0000">
+
+    <br><br>
+
+    <h1>Datos del viaje</h1>
+
+    <br>
+
+    <label for="lugar">Elija un destino:</label> <br><br>
+    <select id="lugar" name="lugar" size="4">
+        <option value="Lauterbrunen">Lauterbrunen</option>
+        <option value="Florencia">Florencia</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Valencia">Valencia</option>
+
+    </select>
+
+    <br><br>
+
+    <label for="origen">Lugar de origen:</label>
+    <input type="text" id="origen" name="origen" readonly value="San salvador">
+
+    <br><br>
+
+    <label for="acompañantes">Número de acompañantes:</label>
+    <input type="number" id="acompañantes" name="acompañantes" min="1" max="5" step="1">
+
+    <br><br>
+    
+    <label for="salida">Fecha de salida:</label>
+    <input type="date" id="salida" name="salida">
+
+    <br><br>
+
+    <label for="regreso">Fecha de regreso:</label>
+    <input type="date" id="regreso" name="regreso">
+
+    <br><br>
+
+    <input type="submit" value="Enviar">
+    <input type="reset" value="Borrar">
+
+    </form>
 
 
 
-</form>
+
+
 
 
     
