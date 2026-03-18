@@ -1,12 +1,29 @@
 h1{
-   font-family:"Playfair Display",;
-   font-weight:900 ;
-   font-style: ;
-   font-size: 1rem;
+    font-family: "playfarair Display", serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 7rem;
+
 }
 
 h2{
-   font-family:"Playfair Display",serif;
-   font-weight: 400;
-   font-size: 1rem;
+    font-family: "playfarair Display", serif;
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+h3{
+    font-family: "times new roman", serif;
+    font-weight: 100;
+    font-size: 2rem;
+}
+
+p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+    font-size: 1rem;
+}
+
+body{
+    background-color: burlywood;
 }
