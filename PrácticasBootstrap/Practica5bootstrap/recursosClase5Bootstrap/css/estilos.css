@@ -1,0 +1,21 @@
+
+
+/* Estilos especificos */
+body {
+    font-family: 'Inter', sans-serif;
+    background-image: url(../img/suburbiavertical.jpg);
+    background-repeat: repeat;
+}
+
+section {
+    
+    padding: 20px;
+    background-color: #ffffffce;
+    border-radius: 10px;
+    
+}
+
+#s1, #s2, #s3, #s4, #s5 {
+    margin-bottom: 15px;
+    
+}

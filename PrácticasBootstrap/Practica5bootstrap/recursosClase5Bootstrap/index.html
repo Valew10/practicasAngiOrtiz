@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espacios Liminales | Bootstrap Edition</title>
+    
+    <!-- CDN de Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS para detalles específicos -->
+    <link rel="stylesheet" href="css/estilos.css">
+    
+    
+</head>
+
+<body>
+    <!-- BARRA DE NAVEGACIÓN (Componente Navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand font-special" href="#">Espacios Liminales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#s1">Historia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#s2">Conceptos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#s3">Ficha</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#s4">Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#s5">Galería</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="container my-5">
+        
+        <!-- SECCIÓN 1: SISTEMA DE CUADRÍCULAS (Grid) -->
+        <section id="s1" class="seccion-card">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center">
+                    <img src="img/backrooms.jpg" class="img-fluid rounded shadow mb-3" alt="Backrooms">
+                </div>
+                <div class="col-md-8">
+                    <h2 class="text-primary">Historia y Origen</h2>
+                    <h3 class="h5 text-muted">El umbral entre realidades</h3>
+                    <p>El término <strong>"liminal"</strong> proviene del latín <em>limen</em>, que significa umbral...</p>
+                    <a href="https://es.wikipedia.org/wiki/Espacio_liminal" target="_blank" class="btn btn-outline-primary btn-sm">Leer más en Wikipedia</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: COLUMNAS PARA CARACTERÍSTICAS -->
+        <section id="s2" class="seccion-card">
+            <h2 class="text-primary mb-4">Conceptos Clave</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4 class="h5"><i class="bi bi-check-circle"></i> Características</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent"><strong>Ausencia de personas:</strong> Lugares vacíos.</li>
+                        <li class="list-group-item bg-transparent"><strong>Transicionalidad:</strong> Puntos de paso.</li>
+                        <li class="list-group-item bg-transparent"><strong>Iluminación artificial:</strong> Luces frías.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 mt-3 mt-lg-0">
+                    <h4 class="h5">Ejemplos comunes</h4>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item bg-transparent border-0">Centros comerciales cerrados.</li>
+                        <li class="list-group-item bg-transparent border-0">Pasillos de hoteles.</li>
+                        <li class="list-group-item bg-transparent border-0">Gasolineras desiertas.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TABLA RESPONSIVA -->
+        <section id="s3" class="seccion-card">
+            <h2 class="text-primary mb-4">Ficha Técnica</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered border-primary">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Etimología</th>
+                            <td>Limen (Umbral en Latín)</td>
+                        </tr>
+                        <tr>
+                            <th>Sensación</th>
+                            <td>Kenopsia: Atmósfera de lugar vacío.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: FORMULARIO CON COMPONENTES DE BOOTSTRAP -->
+        <section id="s4" class="seccion-card">
+            <h2 class="text-primary mb-4">Registro de Exploradores</h2>
+            <form action="Index.html" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Tu nombre">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Alias</label>
+                    <input type="text" class="form-control" placeholder="Explorador_99">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Edad</label>
+                    <input type="number" class="form-control">
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">Correo</label>
+                    <input type="email" class="form-control" placeholder="usuario@dimension.com">
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Área de interés</label>
+                    <select class="form-select">
+                        <option value="fotografia">Fotografía</option>
+                        <option value="teoria">Teoría y Psicología</option>
+                        <option value="backrooms">Backrooms</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 5: GALERÍA (Grid Responsivo) -->
+        <section id="s5" class="seccion-card">
+            <h2 class="text-primary mb-4 text-center">Galería Liminal</h2>
+            <div class="row g-3">
+                <!-- Cada imagen ocupa 12 col en móvil, 6 en tablet y 4 en desktop -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <img src="img/eternalsuburbia.jpg" class="img-fluid rounded shadow-sm" alt="G1">
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <img src="img/pinkbuilding.jpg" class="img-fluid rounded shadow-sm" alt="G2">
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <img src="img/Xiao-LiminalSpaces.jpg" class="img-fluid rounded shadow-sm" alt="G3">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p class="mb-0">Modificado para fines educativos</p>
+        <small class="text-secondary">© 2026 - Estética Liminal</small>
+    </footer>
+
+    <!-- JS de Bootstrap (necesario para el menú colapsable) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
