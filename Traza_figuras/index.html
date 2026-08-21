@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Traza las figuras</title>
+
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <main class="juego">
+
+
+        <header>
+
+            <h1>TRAZA LAS FIGURAS</h1>
+
+            <p>
+                Sigue el trazo y descubre la figura
+            </p>
+
+            <div class="puntuacion">
+                 <span id="puntos">0</span>
+            </div>
+
+        </header>
+
+
+        
+
+        <section class="zona-juego">
+
+            <div class="instruccion">
+
+                <span id="icono"></span>
+
+                <span id="instruccionTexto">
+                    Mantén presionado y sigue la línea
+                </span>
+
+            </div>
+
+
+            <div class="canvas-container">
+
+                <canvas id="canvas"></canvas>
+
+            </div>
+
+
+            <div id="mensaje" class="mensaje"></div>
+
+
+            <button id="reiniciar">
+                 Intentar de nuevo
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>v
