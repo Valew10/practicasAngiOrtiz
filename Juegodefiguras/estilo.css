@@ -1,0 +1,450 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Arial Rounded MT Bold", "Trebuchet MS", Arial, sans-serif;
+    background: #ffffff;
+    color: #333;
+    min-height: 100vh;
+}
+
+.juego {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 0 25px 30px;
+}
+
+header {
+    text-align: center;
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    display: inline-block;
+    background: #ffcf1b;
+    color: white;
+    padding: 20px 55px;
+    border-radius: 25px;
+    font-size: 38px;
+    margin: 0;
+    border: 4px solid #168ee5;
+    box-shadow: 6px 6px 0 #ed2864;
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    font-size: 23px;
+    font-weight: bold;
+    color: #333;
+    margin: 18px 0 12px;
+}
+
+.puntuacion {
+    display: inline-block;
+    background: #fff4c2;
+    color: #333;
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 3px solid #ffcf1b;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.categoria {
+    background: #ffffff;
+    min-height: 320px;
+    border-radius: 25px;
+    padding: 15px;
+    text-align: center;
+    border: 4px solid;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.categoria:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+}
+
+
+
+.categoria.circulo {
+    border-color: #1596e6;
+    background: #f7fcff;
+}
+
+.categoria.circulo h2 {
+    background: #1596e6;
+}
+
+
+
+.categoria.cuadrado {
+    border-color: #ffcf1b;
+    background: #fffdf4;
+}
+
+.categoria.cuadrado h2 {
+    background: #ffcf1b;
+}
+
+
+
+.categoria.triangulo {
+    border-color: #8bd735;
+    background: #fbfff7;
+}
+
+.categoria.triangulo h2 {
+    background: #70bd25;
+}
+
+
+
+.categoria.rectangulo {
+    border-color: #9252c7;
+    background: #fcf9ff;
+}
+
+
+
+.categoria.rectangulo h2 {
+    background: #9252c7;
+}
+
+.categoria h2 {
+    display: inline-block;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 21px;
+    margin: -2px 0 15px;
+    min-width: 170px;
+}
+
+
+.zona {
+    height: 205px;
+    margin-top: 5px;
+    border: 3px dashed #b7b7b7;
+    border-radius: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    transition: all 0.2s ease;
+}
+
+.zona.activa {
+    background: #fff9c9;
+    border-color: #ffcf1b;
+    transform: scale(1.02);
+    box-shadow: inset 0 0 15px rgba(255, 207, 27, 0.25);
+}
+
+
+.figuras {
+    margin-top: 25px;
+    padding: 25px 30px;
+
+    background: #ffffff;
+
+    border: 3px solid #e5e5e5;
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 35px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.figura.circulo {
+    width: 90px;
+    height: 90px;
+
+    background: #079ce8;
+
+    border-radius: 50%;
+
+    box-shadow:
+        inset -4px -5px 0 rgba(0, 0, 0, 0.08),
+        0 5px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+
+.figura.cuadrado {
+    width: 90px;
+    height: 90px;
+
+    background: #ff3838;
+
+    border-radius: 4px;
+
+    box-shadow:
+        inset -4px -5px 0 rgba(0, 0, 0, 0.08),
+        0 5px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+
+.figura.triangulo {
+    width: 0;
+    height: 0;
+
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 90px solid #b5ff5b;
+
+    filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.12));
+}
+
+
+
+.figura.rectangulo {
+    width: 125px;
+    height: 70px;
+
+    background: #8bcf32;
+
+    border-radius: 5px;
+
+    box-shadow:
+        inset -4px -5px 0 rgba(0, 0, 0, 0.08),
+        0 5px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+.figura {
+    cursor: grab;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.figura:hover {
+    transform: scale(1.12);
+}
+
+.figura:active {
+    cursor: grabbing;
+}
+
+.figura.arrastrando {
+    opacity: 0.55;
+    transform: scale(1.08);
+}
+
+
+.mensaje {
+    text-align: center;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    margin-top: 20px;
+
+    min-height: 40px;
+
+    transition: all 0.2s ease;
+}
+
+
+    display: none;
+
+    width: 90%;
+    max-width: 500px;
+
+    margin: 20px auto;
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 4px solid #ffcf1b;
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    animation: aparecer 0.4s ease;
+}
+
+.pista.visible {
+    display: block;
+}
+
+#iconoPista {
+    font-size: 48px;
+    margin-bottom: 5px;
+}
+
+#textoPista {
+    font-size: 21px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px;
+}
+
+#cerrarPista {
+    border: none;
+
+    background: #1596e6;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    padding: 12px 25px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    box-shadow: 0 4px 0 #0876b9;
+
+    transition: transform 0.15s ease;
+}
+
+#cerrarPista:hover {
+    transform: translateY(-2px);
+}
+
+#cerrarPista:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #0876b9;
+}
+
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.zona.error {
+    animation: errorParpadeo 0.5s ease-in-out 3;
+}
+
+@keyframes errorParpadeo {
+
+    0% {
+        background: white;
+        border-color: #b7b7b7;
+        transform: scale(1);
+    }
+
+    50% {
+        background: #fff1a8;
+        border-color: #ffb300;
+        transform: scale(1.04);
+    }
+
+    100% {
+        background: white;
+        border-color: #b7b7b7;
+        transform: scale(1);
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    .categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .juego {
+        padding: 0 12px 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+        padding: 15px 25px;
+
+        box-shadow: 4px 4px 0 #ed2864;
+    }
+
+    header p {
+        font-size: 18px;
+    }
+
+    .categorias {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .categoria {
+        min-height: 280px;
+    }
+
+    .zona {
+        height: 170px;
+    }
+
+    .figuras {
+        gap: 20px;
+        padding: 20px 10px;
+    }
+
+    .figura.circulo,
+    .figura.cuadrado {
+        width: 70px;
+        height: 70px;
+    }
+
+    .figura.triangulo {
+        border-left-width: 40px;
+        border-right-width: 40px;
+        border-bottom-width: 70px;
+    }
+
+    .figura.rectangulo {
+        width: 95px;
+        height: 60px;
+    }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasifica las figuras</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <main class="juego">
+
+        <header>
+            <h1>CLASIFICA LAS FIGURAS </h1>
+            <p>Arrastra cada figura a su lugar</p>
+
+            <div class="puntuacion">
+                 <span id="puntos">0</span>
+            </div>
+        </header>
+
+        
+        <section class="categorias">
+
+            <div class="categoria circulo" data-forma="circulo">
+                <h2>CÍRCULO</h2>
+                <div class="zona"></div>
+            </div>
+
+            <div class="categoria cuadrado" data-forma="cuadrado">
+                <h2>CUADRADO</h2>
+                <div class="zona"></div>
+            </div>
+
+            <div class="categoria triangulo" data-forma="triangulo">
+                <h2>TRIÁNGULO</h2>
+                <div class="zona"></div>
+            </div>
+
+            <div class="categoria rectangulo" data-forma="rectangulo">
+                <h2>RECTÁNGULO</h2>
+                <div class="zona"></div>
+            </div>
+
+        </section>
+
+        
+        <section class="figuras" id="figuras">
+
+            <div class="figura circulo" data-forma="circulo" draggable="true"></div>
+
+            <div class="figura cuadrado" data-forma="cuadrado" draggable="true"></div>
+
+            <div class="figura triangulo" data-forma="triangulo" draggable="true"></div>
+
+            <div class="figura rectangulo" data-forma="rectangulo" draggable="true"></div>
+
+            <div class="figura triangulo" data-forma="triangulo" draggable="true"></div>
+
+            <div class="figura circulo" data-forma="circulo" draggable="true"></div>
+
+            <div class="figura cuadrado" data-forma="cuadrado" draggable="true"></div>
+
+            <div class="figura rectangulo" data-forma="rectangulo" draggable="true"></div>
+
+        </section>
+
+        <div id="mensaje" class="mensaje"></div>
+
+  <div id="pista" class="pista">
+    <div id="iconoPista"></div>
+    <p id="textoPista"></p>
+    <button id="cerrarPista">¡INTÉNTALO DE NUEVO!</button>
+</div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
