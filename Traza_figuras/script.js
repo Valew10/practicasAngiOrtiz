@@ -5,36 +5,28 @@ const mensaje = document.getElementById("mensaje");
 const puntosTexto = document.getElementById("puntos");
 const reiniciar = document.getElementById("reiniciar");
 
-
-
 canvas.width = 700;
 canvas.height = 450;
 
-
-
 let dibujando = false;
-
 let puntos = 0;
+let puntoInicio = null;
+let ladosCompletados = new Set();
 
-let progreso = 0;
 
 
 
 
 const triangulo = [
-
-    { x: 350, y: 70 },   
-    { x: 170, y: 350 },  
-    { x: 530, y: 350 },  
-    { x: 350, y: 70 }    
+    { x: 350, y: 70 },   // 🟢 Verde 1
+    { x: 170, y: 350 },  // 🟢 Verde 2
+    { x: 530, y: 350 },  // 🟡 Amarillo
+    { x: 350, y: 70 }    // Regreso arriba
 ];
 
 
 
-
 function dibujarFigura() {
-
-   
 
     ctx.clearRect(
         0,
@@ -47,7 +39,7 @@ function dibujarFigura() {
     
     ctx.beginPath();
 
-    ctx.setLineDash([6, 8]);
+    ctx.setLineDash([7, 8]);
 
     ctx.lineWidth = 5;
 
@@ -55,18 +47,13 @@ function dibujarFigura() {
 
     ctx.lineCap = "round";
 
-
     ctx.moveTo(
         triangulo[0].x,
         triangulo[0].y
     );
 
 
-    for (
-        let i = 1;
-        i < triangulo.length;
-        i++
-    ) {
+    for (let i = 1; i < triangulo.length; i++) {
 
         ctx.lineTo(
             triangulo[i].x,
@@ -75,20 +62,18 @@ function dibujarFigura() {
 
     }
 
-
     ctx.stroke();
 
     ctx.setLineDash([]);
 
 
     
-
     ctx.beginPath();
 
     ctx.arc(
         triangulo[0].x,
         triangulo[0].y,
-        13,
+        14,
         0,
         Math.PI * 2
     );
@@ -104,7 +89,7 @@ function dibujarFigura() {
     ctx.arc(
         triangulo[1].x,
         triangulo[1].y,
-        13,
+        14,
         0,
         Math.PI * 2
     );
@@ -115,17 +100,18 @@ function dibujarFigura() {
 
 
     
+
     ctx.beginPath();
 
     ctx.arc(
         triangulo[2].x,
         triangulo[2].y,
-        10,
+        11,
         0,
         Math.PI * 2
     );
 
-    ctx.fillStyle = "#ffcf1b";
+    ctx.fillStyle = "#FFCF1B";
 
     ctx.fill();
 
@@ -137,119 +123,128 @@ function dibujarFigura() {
 
     ctx.textAlign = "center";
 
-
     ctx.fillText(
-        "Empieza aquí 👆",
+        "Empieza en cualquier punto verde ",
         350,
         40
     );
-
 }
-
 
 
 
 function obtenerPosicion(evento) {
 
-    const rect =
-        canvas.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
 
     let x;
     let y;
 
 
-   
-    if (evento.touches) {
+    if (evento.touches && evento.touches.length > 0) {
 
-        x =
-            evento.touches[0].clientX;
+        x = evento.touches[0].clientX;
+        y = evento.touches[0].clientY;
 
-        y =
-            evento.touches[0].clientY;
-
-    }
-
-    
-    else {
+    } else {
 
         x = evento.clientX;
-
         y = evento.clientY;
-
     }
 
 
     return {
-
-        x:
-            (x - rect.left) *
+        x: (x - rect.left) *
             (canvas.width / rect.width),
 
-        y:
-            (y - rect.top) *
+        y: (y - rect.top) *
             (canvas.height / rect.height)
-
     };
-
 }
 
 
 
+function distanciaEntrePuntos(x1, y1, x2, y2) {
 
+    return Math.sqrt(
+        Math.pow(x1 - x2, 2) +
+        Math.pow(y1 - y2, 2)
+    );
+}
+
+
+
+function encontrarPuntoVerde(x, y) {
+
+    const distanciaArriba =
+        distanciaEntrePuntos(
+            x,
+            y,
+            triangulo[0].x,
+            triangulo[0].y
+        );
+
+
+    const distanciaAbajo =
+        distanciaEntrePuntos(
+            x,
+            y,
+            triangulo[1].x,
+            triangulo[1].y
+        );
+
+
+    if (distanciaArriba <= 50) {
+
+        return 0;
+    }
+
+
+    if (distanciaAbajo <= 50) {
+
+        return 1;
+    }
+
+
+    return null;
+}
 function comenzar(evento) {
 
     evento.preventDefault();
 
-
-    const posicion =
-        obtenerPosicion(evento);
+    const posicion = obtenerPosicion(evento);
 
 
-    
-
-    const distancia =
-        Math.sqrt(
-
-            Math.pow(
-                posicion.x -
-                triangulo[0].x,
-                2
-            )
-
-            +
-
-            Math.pow(
-                posicion.y -
-                triangulo[0].y,
-                2
-            )
-
-        );
+  
+    const inicio = encontrarPuntoVerde(
+        posicion.x,
+        posicion.y
+    );
 
 
-    
-
-    if (distancia > 50) {
+    if (inicio === null) {
 
         mensaje.textContent =
-            " ¡Empieza en el punto verde!";
+            " ¡Empieza en un punto verde!";
 
         mensaje.style.color =
-            "#f39c12";
+            "#F39C12";
 
         return;
-
     }
 
 
     
+    puntoInicio = inicio;
+
+
+   
+    ladosCompletados.clear();
+
 
     dibujando = true;
 
-    progreso = 0;
 
-
-    
+  
     ctx.beginPath();
 
     ctx.moveTo(
@@ -258,69 +253,121 @@ function comenzar(evento) {
     );
 
 
-    
     ctx.strokeStyle =
         "#1596E6";
 
     ctx.lineWidth = 10;
 
-    ctx.lineCap =
-        "round";
+    ctx.lineCap = "round";
 
-    ctx.lineJoin =
-        "round";
+    ctx.lineJoin = "round";
 
 
     mensaje.textContent =
-        " ¡Muy bien! Sigue la línea";
+        "¡Muy bien! Sigue la línea";
 
     mensaje.style.color =
         "#1596E6";
-
 }
+
+
+
+
 
 
 
 function dibujar(evento) {
 
     if (!dibujando) {
-
         return;
-
     }
-
 
     evento.preventDefault();
 
+    const posicion = obtenerPosicion(evento);
 
-    const posicion =
-        obtenerPosicion(evento);
-
-
-    
-    const cerca =
-        estaCercaDelTrazo(
-            posicion.x,
-            posicion.y
-        );
+    const lado = obtenerLadoCercano(
+        posicion.x,
+        posicion.y
+    );
 
 
-    
-    if (!cerca) {
+
+    if (lado === -1) {
 
         dibujando = false;
 
-
         mensaje.textContent =
-            " ¡Casi! Sigue la línea punteada";
+            " ¡Te saliste de la línea!";
 
-        mensaje.style.color =
-            "#f39c12";
-
+        mensaje.style.color = "#F39C12";
 
         return;
-
     }
+
+
+    
+
+    ladosCompletados.add(lado);
+
+
+  
+    ctx.lineTo(
+        posicion.x,
+        posicion.y
+    );
+
+    ctx.stroke();
+
+
+   
+
+    let puntoFinal;
+
+    if (puntoInicio === 0) {
+
+       
+        puntoFinal = triangulo[0];
+
+    } else {
+
+     
+        puntoFinal = triangulo[1];
+    }
+
+
+    
+
+    const distanciaFinal =
+        distanciaEntrePuntos(
+            posicion.x,
+            posicion.y,
+            puntoFinal.x,
+            puntoFinal.y
+        );
+
+
+    if (
+        ladosCompletados.size === 3 &&
+        distanciaFinal <= 45
+    ) {
+
+        terminar();
+
+        return;
+    }
+
+
+    mensaje.textContent =
+        "¡Sigue toda la línea!";
+
+    mensaje.style.color =
+        "#1596E6";
+}
+
+
+   
+    ladosCompletados.add(lado);
 
 
     
@@ -333,35 +380,57 @@ function dibujar(evento) {
 
 
     
-    progreso++;
+
+    let puntoFinal;
 
 
-    
+    if (puntoInicio === 0) {
 
-    if (progreso > 20) {
+        
+        puntoFinal = triangulo[0];
 
-        mensaje.textContent =
-            " ¡Sigue así!";
+    } else {
 
-        mensaje.style.color =
-            "#1596E6";
-
+       
+        puntoFinal = triangulo[1];
     }
 
 
     
-    if (progreso >= 300) {
+
+    const distanciaFinal =
+        distanciaEntrePuntos(
+            posicion.x,
+            posicion.y,
+            puntoFinal.x,
+            puntoFinal.y
+        );
+
+
+
+
+    if (
+        ladosCompletados.size === 3 &&
+        distanciaFinal <= 25
+    ) {
 
         terminar();
 
+        return;
     }
 
+
+  
+    mensaje.textContent =
+        " ¡Sigue toda la línea!";
+
+    mensaje.style.color =
+        "#1596E6";
 }
 
 
 
-
-function estaCercaDelTrazo(x, y) {
+function obtenerLadoCercano(x, y) {
 
     const tolerancia = 45;
 
@@ -372,40 +441,33 @@ function estaCercaDelTrazo(x, y) {
         i++
     ) {
 
-        const p1 =
-            triangulo[i];
+        const p1 = triangulo[i];
 
-        const p2 =
-            triangulo[i + 1];
+        const p2 = triangulo[i + 1];
 
 
         const distancia =
             distanciaPuntoLinea(
-
                 x,
                 y,
-
                 p1.x,
                 p1.y,
-
                 p2.x,
                 p2.y
-
             );
 
 
         if (distancia <= tolerancia) {
 
-            return true;
-
+            return i;
         }
-
     }
 
 
-    return false;
-
+    return -1;
 }
+
+
 
 
 function distanciaPuntoLinea(
@@ -417,17 +479,13 @@ function distanciaPuntoLinea(
     y2
 ) {
 
-    const A =
-        px - x1;
+    const A = px - x1;
 
-    const B =
-        py - y1;
+    const B = py - y1;
 
-    const C =
-        x2 - x1;
+    const C = x2 - x1;
 
-    const D =
-        y2 - y1;
+    const D = y2 - y1;
 
 
     const dot =
@@ -445,58 +503,41 @@ function distanciaPuntoLinea(
 
     if (lenSq !== 0) {
 
-        param =
-            dot / lenSq;
-
+        param = dot / lenSq;
     }
 
 
     let xx;
-
     let yy;
 
 
     if (param < 0) {
 
         xx = x1;
-
         yy = y1;
 
-    }
-
-    else if (param > 1) {
+    } else if (param > 1) {
 
         xx = x2;
-
         yy = y2;
 
-    }
+    } else {
 
-    else {
+        xx = x1 + param * C;
 
-        xx =
-            x1 +
-            param * C;
-
-        yy =
-            y1 +
-            param * D;
-
+        yy = y1 + param * D;
     }
 
 
-    const dx =
-        px - xx;
+    const dx = px - xx;
 
-    const dy =
-        py - yy;
+    const dy = py - yy;
 
 
     return Math.sqrt(
         dx * dx +
         dy * dy
     );
-
 }
 
 
@@ -506,24 +547,18 @@ function terminar() {
     dibujando = false;
 
 
-    
     puntos += 10;
-
 
     puntosTexto.textContent =
         puntos;
 
 
-    
     mensaje.textContent =
-        " ¡MUY BIEN! ¡Completaste el triángulo!";
-
+        "🎉 ¡MUY BIEN! ¡Completaste el triángulo!";
 
     mensaje.style.color =
         "#35A853";
 
-
-    
 
     canvas.classList.add("exito");
 
@@ -533,7 +568,6 @@ function terminar() {
         canvas.classList.remove("exito");
 
     }, 600);
-
 }
 
 
@@ -571,7 +605,6 @@ canvas.addEventListener(
 
 
 
-
 canvas.addEventListener(
     "touchstart",
     comenzar,
@@ -597,23 +630,21 @@ canvas.addEventListener(
 
 
 
-
 reiniciar.addEventListener(
     "click",
     () => {
 
-        progreso = 0;
-
         dibujando = false;
+
+        puntoInicio = null;
+
+        ladosCompletados.clear();
 
         mensaje.textContent = "";
 
         dibujarFigura();
-
     }
 );
-
-
 
 
 dibujarFigura();
